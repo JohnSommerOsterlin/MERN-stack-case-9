@@ -1,6 +1,6 @@
 // Dependencies
 import express from "express"
-import { config } from "dotenv"
+import { config, PORT } from "./configs.js"
 
 
 
@@ -14,5 +14,5 @@ app.get("/", (req, res) => {
 
 // Listen for requests
 app.listen(process.env.PORT, () => {
-    console.log("Listening on port 5000")
+    console.log(`Server listening to port ${PORT}`)
 })
