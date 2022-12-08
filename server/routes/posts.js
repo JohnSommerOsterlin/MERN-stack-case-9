@@ -1,5 +1,5 @@
 import express from "express";
-import { createPost, getPosts, getPost } from "../controllers/postController.js"
+import { createPost, getPosts, getPost, deletePost, updatePost } from "../controllers/postController.js"
 
 
 const router = express.Router ();
@@ -14,14 +14,10 @@ router.get("/:id", getPost)
 router.post("/", createPost)
 
 // DELETE a post
-router.delete("/:id", (req, res) => {
-    res.json({message: "DELETE a post"})
-})
+router.delete("/:id", deletePost)
 
 // UPDATE a post
-router.patch("/:id", (req, res) => {
-    res.json({message: "UPDATE a post"})
-})
+router.patch("/:id", updatePost)
 
 
 export default router;
