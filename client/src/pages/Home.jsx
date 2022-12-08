@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PostDetails from "../components/PostDetails";
 
 
 const Home = () => {
@@ -22,7 +23,7 @@ const Home = () => {
         <div className="home">
             <div className="posts ">
                 {posts && posts.map((post) => (
-                    <p key={post._id}>{post.username}</p>
+                    <PostDetails key={post._id} post={post} />
                 ))}
             </div>
         </div>
