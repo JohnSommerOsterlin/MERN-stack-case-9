@@ -1,29 +1,17 @@
 import express from "express";
-import Post from "../models/postModel.js"
+import { createPost, getPosts, getPost } from "../controllers/postController.js"
+
 
 const router = express.Router ();
 
 // GET all posts
-router.get("/", (req, res) => {
-    res.json({message: "GET all posts"})
-})
+router.get("/", getPosts)
 
 // GET a single post
-router.get("/:id", (req, res) => {
-    res.json({message:"GET a single post"})
-})
+router.get("/:id", getPost)
 
 // POST a new post
-router.post("/", async (req, res) => {
-    const {description, likes} = req.body
-
-    try {
-        const post = await Post.create({description, likes})
-        res.status(200).json(post)
-    } catch (error) {
-        res.status(400).json({error: error.message})
-    }
-})
+router.post("/", createPost)
 
 // DELETE a post
 router.delete("/:id", (req, res) => {
