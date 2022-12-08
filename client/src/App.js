@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Navbar />
-        <div className="pages px-10 py-6">
+        <div className="pages px-3 py-6">
           <Routes>
             <Route 
             path="/"
