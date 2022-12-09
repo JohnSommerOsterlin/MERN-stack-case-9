@@ -1,7 +1,10 @@
 import { useState } from "react"
+import { usePostsContext } from "../hooks/usePostsContext";
 
 
 const PostForm = () => {
+    const {dispatch } = usePostsContext()
+
     const [username, setUsername] = useState("")
     const [description, setDescription] = useState("")
     // const [likes, setLikes] = useState(0)
@@ -29,6 +32,7 @@ const PostForm = () => {
             setDescription("")
             setError(null)
             console.log("New post added", response)
+            dispatch({type: "CREATE_POST", payload: json})
         }
     }
 

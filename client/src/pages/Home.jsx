@@ -1,5 +1,7 @@
-// Dependencies
-import { useEffect, useState } from "react";
+// Hooks
+import { useEffect } from "react";
+import { usePostsContext } from "../hooks/usePostsContext";
+
 
 // Components
 import PostDetails from "../components/PostDetails";
@@ -7,7 +9,7 @@ import PostForm from "../components/PostForm";
 
 
 const Home = () => {
-    const [posts, setPosts] = useState(null)
+    const {posts, dispatch} = usePostsContext()
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -15,7 +17,7 @@ const Home = () => {
             const json = await response.json()
 
             if (response.ok) {
-                setPosts(json)
+                dispatch({type: "SET_POSTS", payload: json})
             }
         }
 
