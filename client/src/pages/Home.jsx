@@ -1,5 +1,9 @@
+// Dependencies
 import { useEffect, useState } from "react";
+
+// Components
 import PostDetails from "../components/PostDetails";
+import PostForm from "../components/PostForm";
 
 
 const Home = () => {
@@ -20,12 +24,13 @@ const Home = () => {
 
 
     return ( 
-        <div className="home">
+        <div className="home w-11/12 max-w-2xl">
             <div className="posts ">
                 {posts && posts.map((post) => (
                     <PostDetails key={post._id} post={post} />
                 ))}
             </div>
+            <PostForm />
         </div>
     );
 }
