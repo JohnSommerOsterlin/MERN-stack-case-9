@@ -4,7 +4,7 @@ import { useState } from "react"
 const PostForm = () => {
     const [username, setUsername] = useState("")
     const [description, setDescription] = useState("")
-    // const [likes, setLikes] = useState("")
+    // const [likes, setLikes] = useState(0)
     const [error, setError] = useState(null)
 
     const handleSubmit = async (e) => {
@@ -36,7 +36,7 @@ const PostForm = () => {
 
     return (  
         <form className="flex flex-col" onSubmit={handleSubmit}>
-            <h3>Add a new bark</h3>
+            <h3 className="font-bold text-lg">Add a new bark</h3>
 
             <div className="mb-5">
                 <label className="block">Username</label>
