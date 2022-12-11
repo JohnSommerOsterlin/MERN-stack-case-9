@@ -1,6 +1,8 @@
-import Post from "../models/postModel.js"
+// Dependencies
 import mongoose from "mongoose"
 
+// Components
+import Post from "../models/postModel.js"
 
 // Get all postes
 const getPosts = async (req, res) => {

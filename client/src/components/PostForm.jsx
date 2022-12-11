@@ -1,3 +1,4 @@
+// Dependencies
 import { useState } from "react"
 import { usePostsContext } from "../hooks/usePostsContext";
 

@@ -32,7 +32,6 @@ const PostDetails = ({ post }) => {
                 </div>
                 <p className="text-xs">{post.createdAt}</p>
             </div>
-            {/* <TiDeleteOutline /> */}
             <TiDeleteOutline onClick={handleClick} className="absolute right-3 w-6 h-6 opacity-60"/>
         </div>
     );
