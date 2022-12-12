@@ -1,4 +1,7 @@
+// Dependencies
 import express from "express";
+
+// Controller functions
 import { createPost, getPosts, getPost, deletePost, updatePost } from "../controllers/postController.js"
 
 

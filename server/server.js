@@ -6,6 +6,7 @@ import cors from "cors"
 
 import { config, MONGO_URI, PORT } from "./configs.js"
 import postRoutes from "./routes/posts.js"
+import userRoutes from "./routes/user.js"
 
 
 // Express app
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use("/api/posts", postRoutes)
+app.use("/api/user", userRoutes)
 
 
 // Connect to mongoDB

@@ -1,7 +1,7 @@
 // Dependencies
 import mongoose from "mongoose"
 
-// Components
+// Post Schema
 import Post from "../models/postModel.js"
 
 // Get all postes
