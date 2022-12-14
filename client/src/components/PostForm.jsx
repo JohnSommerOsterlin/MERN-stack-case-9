@@ -60,7 +60,7 @@ const PostForm = () => {
             </div>
 
             <button className="border-2 w-28 rounded-lg py-1 px-2">Post</button>
-            {error && <div>{error}</div>}
+            {error && <div className="border-2 bg-red-300 p-3">{error}</div>}
         </form>
     );
 }
