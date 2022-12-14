@@ -1,5 +1,5 @@
-import { PostsContext } from "../context/PostsContext";
 import { useContext } from "react";
+import { PostsContext } from "../context/PostsContext";
 
 export const usePostsContext = () => {
     const context = useContext(PostsContext)
@@ -8,3 +8,5 @@ export const usePostsContext = () => {
     }
     return context
 }
+
+
