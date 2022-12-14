@@ -38,4 +38,3 @@ mongoose.connect(MONGO_URI)
     console.log(error);
 })
 
-// Listen for requests
