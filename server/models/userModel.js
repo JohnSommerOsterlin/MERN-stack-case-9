@@ -6,6 +6,11 @@ import validator from "validator";
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
     username: {
         type: String,
         required: true,
@@ -19,12 +24,16 @@ const userSchema = new Schema({
 })
 
 // Static signup method
-userSchema.statics.signup = async function (username, password) {
+userSchema.statics.signup = async function (email, username, password) {
 
     // Validation
-    if (!username || !password) {
+    if (!email || !username || !password) {
         throw Error("All fields must be filled")
     }
+
+    if(!validator.isEmail(email))
+        throw Error("Not a valid e-mail")
+
     if (!validator.isLength(username, {min: 3, max: 20})) {
         throw Error("Username must be between 3 and 20 characters")
     }
@@ -41,7 +50,7 @@ userSchema.statics.signup = async function (username, password) {
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
-    const user = await this.create({username, password: hash})
+    const user = await this.create({email, username, password: hash})
 
     return user
 }
