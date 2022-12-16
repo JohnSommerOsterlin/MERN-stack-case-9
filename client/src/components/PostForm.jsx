@@ -1,10 +1,14 @@
 // Dependencies
 import { useState } from "react"
+
+// Hooks
 import { usePostsContext } from "../hooks/usePostsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 
 const PostForm = () => {
     const { dispatch } = usePostsContext()
+    const {user} = useAuthContext()
 
     const [username, setUsername] = useState("")
     const [description, setDescription] = useState("")
@@ -13,6 +17,10 @@ const PostForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        if (!user) {
+            setError("You must be logged in")
+            return
+        }
 
         const post = {username, description}
 
@@ -20,7 +28,8 @@ const PostForm = () => {
             method: "POST",
             body: JSON.stringify(post),
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${user.token}` 
             }
         })
         const json = await response.json()

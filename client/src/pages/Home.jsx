@@ -1,6 +1,7 @@
 // Hooks
 import { useEffect } from "react";
 import { usePostsContext } from "../hooks/usePostsContext";
+import { useAuthContext } from "../hooks/useAuthContext"
 
 
 // Components
@@ -10,10 +11,15 @@ import PostForm from "../components/PostForm";
 
 const Home = () => {
     const {posts, dispatch} = usePostsContext()
+    const {user} = useAuthContext()
 
     useEffect(() => {
         const fetchPost = async () => {
-            const response = await fetch("http://localhost:5000/api/posts")
+            const response = await fetch("http://localhost:5000/api/posts", {
+                headers: {
+                    "Authorization": `Bearer ${user.token}` 
+                }
+            })
             const json = await response.json()
 
             if (response.ok) {
@@ -21,8 +27,11 @@ const Home = () => {
             }
         }
 
-        fetchPost()
-    }, [])
+        if (user) {
+            fetchPost()
+        }
+        
+    }, [dispatch, user])
 
 
     return ( 
