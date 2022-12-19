@@ -1,3 +1,4 @@
+// Dependencies
 import { useReducer } from "react";
 import { createContext } from "react";
 
@@ -14,6 +15,10 @@ export const postsReducer = (state, action) => {
                     posts: [action.payload, ...state.posts]
                 }
             case "DELETE_POST":
+                return {
+                    posts: state.posts.filter((p) => p._id !== action.payload._id)
+                }
+            case "UPDATE_POST":
                 return {
                     posts: state.posts.filter((p) => p._id !== action.payload._id)
                 }

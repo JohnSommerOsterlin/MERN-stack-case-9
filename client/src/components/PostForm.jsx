@@ -53,14 +53,6 @@ const PostForm = () => {
             <h3 className="font-bold text-lg">Add a new bark</h3>
 
             <div className="mb-5">
-                <label className="block">Username</label>
-                <input className="border-2 rounded-md" type="text" 
-                onChange={(e) => setUsername(e.target.value)} 
-                value={username}
-                />
-            </div>
-
-            <div className="mb-5">
                 <label className="block">Bark your heart out!</label>
                 <textarea className="border-2 area h-36 w-60 rounded-md" type="text" 
                 onChange={(e) => setDescription(e.target.value)} 

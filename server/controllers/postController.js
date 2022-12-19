@@ -56,6 +56,8 @@ const deletePost = async (req, res) => {
 
     res.status(200).json(post)
 }
+
+
 // Update a post
 const updatePost = async (req, res) => {
     const { id } = req.params
