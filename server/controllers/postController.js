@@ -4,9 +4,13 @@ import mongoose from "mongoose"
 // Post Schema
 import Post from "../models/postModel.js"
 
-// Get all postes
+// Get all posts
 const getPosts = async (req, res) => {
-    const posts = await Post.find({}).sort({createdAt: -1})
+    const posts = await Post.find({})
+    .populate("postedBy", "username")
+    .exec();
+
+    console.log(posts)
 
     res.status(200).json(posts)
 }
@@ -29,11 +33,12 @@ const getPost = async (req, res) => {
 
 // Create new post
 const createPost = async (req, res) => {
-    const {username, description, likes} = req.body
+    const {username, description, likes, isPrivate} = req.body
+    const postedBy = req.user._id;
 
     // Add document to db
     try {
-        const post = await Post.create({username, description, likes})
+        const post = await Post.create({username, description, likes, postedBy, isPrivate})
         res.status(200).json(post)
     } catch (error) {
         res.status(400).json({error: error.message})

@@ -15,6 +15,10 @@ const PostDetails = ({ post }) => {
     const { dispatch } = usePostsContext()
     const { user } = useAuthContext()
 
+    const isPrivate = post?.isPrivate 
+    console.log(isPrivate)
+
+
     const [isEditing, setIsEditing] = useState(false)
 
     const handleDelete = async () => {
@@ -38,7 +42,7 @@ const PostDetails = ({ post }) => {
 
     return ( 
         <div className="post-details relative flex flex-col bg-white py-3 px-6 shadow-md border rounded-lg mb-3">
-            <h4 className="font-bold text-lg">{user.username}</h4>
+            <h4 className="font-bold text-lg">{post.postedBy.username}</h4>
 
             {isEditing ? (<EditPostForm post={post}/>
             ) : (
@@ -48,6 +52,9 @@ const PostDetails = ({ post }) => {
             </div>
             )}
 
+            {isPrivate && (
+                <p className="text-sm text-gray-600 absolute right-16 top-3 italic">private</p>
+            )}
             <div className="flex justify-between mt-6">
                 <div className="flex">
                     <AiOutlineHeart className="w-6 h-6"/>
