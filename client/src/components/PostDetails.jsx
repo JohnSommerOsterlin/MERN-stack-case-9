@@ -12,7 +12,7 @@ import { useAuthContext } from "../hooks/useAuthContext"
 import EditPostForm from "./EditPostForm"
 
 const PostDetails = ({ post }) => {
-    const { dispatch } = usePostsContext()
+    const { posts, dispatch } = usePostsContext()
     const { user } = useAuthContext()
 
     const isPrivate = post?.isPrivate 
@@ -38,33 +38,47 @@ const PostDetails = ({ post }) => {
         }
     }
 
+    // Checking if currently signed-in user is the same that created the post
+  const isCurrentUser = user && post.postedBy?.username === user.username;
 
+  return (
+    <div className="post-details relative flex flex-col bg-white py-3 px-6 shadow-md border rounded-lg mb-3">
+      <h4 className="font-bold text-lg">{post.postedBy.username}</h4>
 
-    return ( 
-        <div className="post-details relative flex flex-col bg-white py-3 px-6 shadow-md border rounded-lg mb-3">
-            <h4 className="font-bold text-lg">{post.postedBy.username}</h4>
-
-            {isEditing ? (<EditPostForm post={post}/>
-            ) : (
-            <div>
-            <p>{post.description}</p>
-            <BiPencil onClick={() => setIsEditing(true)} className="absolute top-3 right-10 w-5 h-6 opacity-60"/>
-            </div>
-            )}
-
-            {isPrivate && (
-                <p className="text-sm text-gray-600 absolute right-16 top-3 italic">private</p>
-            )}
-            <div className="flex justify-between mt-6">
-                <div className="flex">
-                    <AiOutlineHeart className="w-6 h-6"/>
-                    <p className="text-xs">{post.likes}</p>
-                </div>
-                <p className="text-xs">{post.createdAt}</p>
-            </div>
-            <TiDeleteOutline onClick={handleDelete} className="absolute right-3 w-6 h-6 opacity-60"/>
+      {isEditing ? (
+        <EditPostForm post={post} />
+      ) : (
+        <div>
+          <p>{post.description}</p>
+          {isCurrentUser && (
+            <>
+              <BiPencil
+                onClick={() => setIsEditing(true)}
+                className="absolute top-3 right-10 w-5 h-6 opacity-60"
+              />
+              <TiDeleteOutline
+                onClick={handleDelete}
+                className="absolute top-3 right-3 w-6 h-6 opacity-60"
+              />
+            </>
+          )}
         </div>
-    );
+      )}
+      <div className="flex justify-between mt-6">
+        <div className="flex">
+          <AiOutlineHeart className="w-6 h-6" />
+          <p className="text-xs">{post.likes}</p>
+        </div>
+        <p className="text-xs">{post.createdAt}</p>
+      </div>
+
+      {post.isPrivate && (
+        <p className="text-sm text-gray-600 absolute right-16 top-3 italic">
+          private
+        </p>
+      )}
+    </div>
+  );
 }
 
 export default PostDetails;
